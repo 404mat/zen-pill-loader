@@ -1,23 +1,30 @@
-#zen-appcontent-navbar-container {
-  position: relative;
+:root {
+  --navbar-height: 10px; /* collapsed navbar height */
+  --pill-max-height: 6px; /* maximum pill height */
+  --pill-width: calc(
+    var(--pill-max-height) * 6
+  ); /* width = 6×height for pill shape */
+  --pill-height: min(var(--pill-max-height), calc(var(--navbar-height) * 0.25));
 }
 
-#zen-appcontent-navbar-container::after {
+#zen-appcontent-wrapper::after {
   content: "";
   position: absolute;
-  top: 50%;
+  top: calc(
+    (var(--navbar-height) - var(--pill-height)) / 2
+  ); /* vertically centered */
   left: 50%;
-  transform: translate(-50%, -50%);
-  width: 38px;
-  height: 6px;
+  transform: translateX(-50%);
+  width: var(--pill-width);
+  height: var(--pill-height);
   background: #ff5f57;
   border-radius: 999px;
-  z-index: 1000;
+  z-index: 10000;
   pointer-events: none;
 
-  /* Animation */
+  /* Pulse animation */
   animation: pulse 1.8s ease-in-out infinite;
-  opacity: 0.5; /* starting opacity */
+  opacity: 0.5;
 }
 
 @keyframes pulse {
