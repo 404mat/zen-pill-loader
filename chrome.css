@@ -1,18 +1,18 @@
 :root {
   --navbar-height: 10px; /* collapsed navbar height */
-  --pill-max-height: 6px; /* maximum pill height */
-  --pill-width: calc(
-    var(--pill-max-height) * 6
-  ); /* width = 6×height for pill shape */
+  --pill-max-height: 6px; /* max pill height */
   --pill-height: min(var(--pill-max-height), calc(var(--navbar-height) * 0.25));
+  --pill-width: calc(var(--pill-height) * 12);
+}
+
+#zen-appcontent-wrapper {
+  position: relative;
 }
 
 #zen-appcontent-wrapper::after {
   content: "";
   position: absolute;
-  top: calc(
-    (var(--navbar-height) - var(--pill-height)) / 2
-  ); /* vertically centered */
+  top: calc((var(--navbar-height) - var(--pill-height)) / 2);
   left: 50%;
   transform: translateX(-50%);
   width: var(--pill-width);
@@ -22,19 +22,16 @@
   z-index: 10000;
   pointer-events: none;
 
-  /* Pulse animation */
   animation: pulse 1.8s ease-in-out infinite;
   opacity: 0.5;
 }
 
 @keyframes pulse {
-  0% {
+  0%,
+  100% {
     opacity: 0.5;
   }
   50% {
     opacity: 1;
-  }
-  100% {
-    opacity: 0.5;
   }
 }
