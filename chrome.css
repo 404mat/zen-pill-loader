@@ -1,0 +1,33 @@
+#zen-appcontent-navbar-container {
+  position: relative;
+}
+
+#zen-appcontent-navbar-container::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 38px;
+  height: 6px;
+  background: #ff5f57;
+  border-radius: 999px;
+  z-index: 1000;
+  pointer-events: none;
+
+  /* Animation */
+  animation: pulse 1.8s ease-in-out infinite;
+  opacity: 0.5; /* starting opacity */
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.5;
+  }
+}
