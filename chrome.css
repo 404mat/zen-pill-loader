@@ -3,31 +3,36 @@
   --pill-max-height: 6px;
   --pill-height: min(var(--pill-max-height), calc(var(--navbar-height) * 0.25));
   --pill-width: calc(var(--pill-height) * 12);
+
+  /* animation positions */
+  --pill-hidden-top: -12px; /* offscreen above window */
+  --pill-visible-top: calc((var(--navbar-height) - var(--pill-height)) / 2);
 }
 
 #zen-appcontent-wrapper {
   position: relative;
 }
 
-/* default: hidden */
+/* default: hidden above the window */
 #zen-appcontent-wrapper::after {
   content: "";
   position: absolute;
-  top: calc((var(--navbar-height) - var(--pill-height)) / 2);
+  top: var(--pill-hidden-top);
   left: 50%;
   transform: translateX(-50%);
   width: var(--pill-width);
   height: var(--pill-height);
-  background: #ff5f57;
+  background: var(--toolbox-textcolor);
   border-radius: 999px;
   z-index: 10000;
   pointer-events: none;
   opacity: 0;
-  transition: opacity 0.2s ease-out;
+  transition: top 0.5s ease, opacity 0.5s ease;
 }
 
-/* only show when selected tab is busy */
+/* show pill when tab is busy */
 :root:has(.tabbrowser-tab[selected][busy]) #zen-appcontent-wrapper::after {
+  top: var(--pill-visible-top);
   opacity: 0.5;
   animation: pulse 1.8s ease-in-out infinite;
 }
