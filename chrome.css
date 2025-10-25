@@ -1,6 +1,6 @@
 :root {
-  --navbar-height: 10px; /* collapsed navbar height */
-  --pill-max-height: 6px; /* max pill height */
+  --navbar-height: var(--zen-element-separation);
+  --pill-max-height: 6px;
   --pill-height: min(var(--pill-max-height), calc(var(--navbar-height) * 0.25));
   --pill-width: calc(var(--pill-height) * 12);
 }
@@ -9,6 +9,7 @@
   position: relative;
 }
 
+/* default: hidden */
 #zen-appcontent-wrapper::after {
   content: "";
   position: absolute;
@@ -21,9 +22,14 @@
   border-radius: 999px;
   z-index: 10000;
   pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease-out;
+}
 
-  animation: pulse 1.8s ease-in-out infinite;
+/* only show when selected tab is busy */
+:root:has(.tabbrowser-tab[selected][busy]) #zen-appcontent-wrapper::after {
   opacity: 0.5;
+  animation: pulse 1.8s ease-in-out infinite;
 }
 
 @keyframes pulse {
